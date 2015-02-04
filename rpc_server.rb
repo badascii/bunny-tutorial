@@ -4,7 +4,7 @@
 require 'bunny'
 require_relative 'fibonacci_server'
 
-conn = Bunny.new
+conn = Bunny.new(automatically_recover: false)
 conn.start
 
 ch = conn.create_channel
@@ -16,4 +16,6 @@ begin
 rescue Interrupt => _
   ch.close
   conn.close
+
+  exit(0)
 end

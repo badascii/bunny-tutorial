@@ -12,6 +12,8 @@ class FibonacciServer
       n = payload.to_i
       r = self.class.fib(n)
 
+      puts " [.] fib(#{n})"
+
       @x.publish(r.to_s, routing_key: properties.reply_to, correlation_id: properties.correlation_id)
     end
   end
